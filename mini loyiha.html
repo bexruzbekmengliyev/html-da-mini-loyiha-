@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+     <style>
+    body {
+      font-family: Arial;
+      background: #222;
+      color: white;
+      text-align: center;
+      padding: 50px;
+    }
+    .card {
+      background: #333;
+      padding: 20px;
+      border-radius: 10px;
+      display: inline-block;
+      width: 300px;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border: none;
+      cursor: pointer;
+      background: #28a745;
+      color: white;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+    <h1>🎮 English Word Game</h1>
+
+<div class="card">
+  <h3 id="word">apple</h3>
+  <p>Translate to Uzbek</p>
+  <input type="text" id="answer" placeholder="Your answer">
+  <button onclick="checkAnswer()">Submit</button>
+  <p id="result"></p>
+  <p>Score: <span id="score">0</span></p>
+</div>
+
+<script>
+  const words = [
+    { en: "apple", uz: "olma" },
+    { en: "book", uz: "kitob" },
+    { en: "car", uz: "mashina" },
+    { en: "water", uz: "suv" },
+    { en: "sun", uz: "quyosh" }
+  ];
+
+  let current = 0;
+  let score = 0;
+
+  function loadWord() {
+    document.getElementById("word").innerText = words[current].en;
+    document.getElementById("answer").value = "";
+    document.getElementById("result").innerText = "";
+  }
+
+  function checkAnswer() {
+    let user = document.getElementById("answer").value.toLowerCase();
+    let correct = words[current].uz;
+
+    if (user === correct) {
+      document.getElementById("result").innerText = "✅ Correct!";
+      score++;
+    } else {
+      document.getElementById("result").innerText = "❌ Wrong! Correct: " + correct;
+    }
+
+    document.getElementById("score").innerText = score;
+
+    current++;
+    if (current >= words.length) {
+      current = 0;
+    }
+
+    setTimeout(loadWord, 1000);
+  }
+
+  loadWord();
+</script>
+
+</body>
+</html>
