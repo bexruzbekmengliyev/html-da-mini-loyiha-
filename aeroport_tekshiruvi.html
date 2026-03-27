@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Airport passport check</title>
+      <style>
+    body {
+      font-family: Arial;
+      background: #0b3d91;
+      color: white;
+      text-align: center;
+      padding: 50px;
+    }
+    .card {
+      background: white;
+      color: black;
+      padding: 20px;
+      border-radius: 10px;
+      width: 350px;
+      margin: auto;
+    }
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      background: green;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    #result {
+      margin-top: 15px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+    <h1>✈️ Aeroport Tekshiruv Tizimi</h1>
+
+<div class="card">
+  <h3>Passport tekshirish</h3>
+
+  <input type="text" id="name" placeholder="Ism">
+  <input type="text" id="passport" placeholder="Passport raqam (AA1234567)">
+
+  <select id="visa">
+    <option value="">Visa bormi?</option>
+    <option value="yes">Ha</option>
+    <option value="no">Yo‘q</option>
+  </select>
+
+  <select id="ticket">
+    <option value="">Bilet bormi?</option>
+    <option value="yes">Ha</option>
+    <option value="no">Yo‘q</option>
+  </select>
+
+  <button onclick="checkPassenger()">Tekshirish</button>
+
+  <p id="result"></p>
+</div>
+
+<script>
+  function checkPassenger() {
+    let name = document.getElementById("name").value;
+    let passport = document.getElementById("passport").value;
+    let visa = document.getElementById("visa").value;
+    let ticket = document.getElementById("ticket").value;
+
+    let result = document.getElementById("result");
+
+    // passport tekshirish (oddiy tekshiruv)
+    let passportValid = /^[A-Z]{2}\d{7}$/.test(passport);
+
+    if (!name || !passport || !visa || !ticket) {
+      result.innerText = "❗ Iltimos, hamma maydonni to‘ldiring";
+      result.style.color = "red";
+      return;
+    }
+
+    if (!passportValid) {
+      result.innerText = "❌ Passport noto‘g‘ri formatda! (AA1234567)";
+      result.style.color = "red";
+      return;
+    }
+
+    if (visa === "yes" && ticket === "yes") {
+      result.innerText = "✅ Ruxsat berildi. Xush kelibsiz, " + name;
+      result.style.color = "green";
+    } else {
+      result.innerText = "⛔ Ruxsat yo‘q! Hujjatlar yetarli emas";
+      result.style.color = "red";
+    }
+  }
+</script>
+</body>
+</html>
