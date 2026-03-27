@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online store yoki Auksion</title>
+     <style>
+    body {
+      font-family: Arial;
+      margin: 0;
+      background: #f4f4f4;
+    }
+    header {
+      background: #333;
+      color: white;
+      padding: 15px;
+      text-align: center;
+    }
+    .container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      padding: 20px;
+    }
+    .card {
+      background: white;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    button {
+      background: green;
+      color: white;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    input {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+    }
+    .auction {
+      background: #ffeeba;
+    }
+  </style>
+</head>
+<body>
+    <header>
+  <h1>🛒 Online Store + Auksion</h1>
+</header>
+
+<div class="container">
+
+  <!-- Product 1 -->
+  <div class="card">
+    <h3>Telefon</h3>
+    <p>Narxi: 200$</p>
+    <button onclick="buy('Telefon')">Sotib olish</button>
+  </div>
+
+  <!-- Product 2 -->
+  <div class="card">
+    <h3>Noutbuk</h3>
+    <p>Narxi: 500$</p>
+    <button onclick="buy('Noutbuk')">Sotib olish</button>
+  </div>
+
+  <!-- Auction -->
+  <div class="card auction">
+    <h3>Auksion: Smart Watch</h3>
+    <p>Boshlang'ich narx: 50$</p>
+    <input type="number" id="bid" placeholder="Narx kiriting">
+    <button onclick="placeBid()">Taklif berish</button>
+    <p id="currentBid">Eng yuqori: 50$</p>
+  </div>
+
+</div>
+
+<!-- Order Form -->
+<div style="padding:20px;">
+  <h2>Buyurtma berish</h2>
+  <form onsubmit="order(event)">
+    <input type="text" placeholder="Ismingiz" required><br>
+    <input type="text" placeholder="Mahsulot nomi" required><br>
+    <input type="number" placeholder="Soni" required><br>
+    <button type="submit">Buyurtma berish</button>
+  </form>
+</div>
+
+<script>
+  function buy(product) {
+    alert(product + " sotib olindi!");
+  }
+
+  let maxBid = 50;
+
+  function placeBid() {
+    let bid = document.getElementById("bid").value;
+    if (bid > maxBid) {
+      maxBid = bid;
+      document.getElementById("currentBid").innerText = "Eng yuqori: " + maxBid + "$";
+    } else {
+      alert("Taklif yuqori bo'lishi kerak!");
+    }
+  }
+
+  function order(e) {
+    e.preventDefault();
+    alert("Buyurtma qabul qilindi!");
+  }
+</script>
+
+</body>
+</html>
